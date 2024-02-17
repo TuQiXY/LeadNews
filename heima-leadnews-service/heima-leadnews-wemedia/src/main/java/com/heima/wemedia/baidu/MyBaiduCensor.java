@@ -2,6 +2,7 @@ package com.heima.wemedia.baidu;
 
 import com.baidu.aip.contentcensor.AipContentCensor;
 import com.baidu.aip.contentcensor.EImgType;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,21 +27,9 @@ public class MyBaiduCensor {
     public String scanText(String text){
 
         JSONObject json = aipContentCensor.textCensorUserDefined(text);
-
-        return (String) json.get("conclusion");
+        return json.getString("conclusion");
     }
 
-    /**
-     * 审核图片
-     * 根据图片的在线url
-     */
-     public String scanImage(String url){
-
-         JSONObject result = aipContentCensor.imageCensorUserDefined(url, EImgType.URL, null);
-
-        return (String) result.get("conclusion");
-
-     }
 
     /**
      * 字节数组审核图片
@@ -52,16 +41,6 @@ public class MyBaiduCensor {
          return (String) jsonObject.get("conclusion");
      }
 
-    /**
-     * 审核本地文件
-     * @param imagePath 传入文件路径
-     * @return
-     */
-     public String scanImageFile(String imagePath){
-
-         JSONObject jsonObject = aipContentCensor.imageCensorUserDefined(imagePath, EImgType.FILE, null);
-         return (String) jsonObject.get("conclusion");
-     }
 
     /**
      * 批量审核图片数组

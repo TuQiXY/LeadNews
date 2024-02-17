@@ -1,4 +1,4 @@
-package com.heima.wemedia.v1;
+package com.heima.wemedia.controller.v1;
 
 import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.common.enums.AppHttpCodeEnum;

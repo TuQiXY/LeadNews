@@ -1,7 +1,9 @@
-package com.heima.wemedia.v1;
+package com.heima.wemedia.controller.v1;
 
+import com.heima.common.constants.WemediaConstants;
 import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.common.enums.AppHttpCodeEnum;
+import com.heima.model.wemedia.dtos.NewsAuthDto;
 import com.heima.model.wemedia.dtos.WmAuditDto;
 import com.heima.model.wemedia.dtos.WmNewsDto;
 import com.heima.model.wemedia.dtos.WmNewsPageReqDto;
@@ -25,11 +27,6 @@ public class WmNewsController {
         return  wmNewsService.findAll(dto);
     }
 
-    /**
-     * 发布或者修改文章
-     * @param dto
-     * @return
-     */
     @PostMapping("/submit")
     public ResponseResult submitNews(@RequestBody WmNewsDto dto){
         return  wmNewsService.submitNews(dto);
@@ -50,57 +47,50 @@ public class WmNewsController {
 
         return wmNewsService.deleteNews(id);
     }
-
     @PostMapping("/down_or_up")
     public ResponseResult downOrUp(@RequestBody WmNewsDto dto){
         return wmNewsService.downOrUp(dto);
     }
 
-    /**
-     *  分页条件查询自媒体文章
+
+    /**自媒体文章人工审核
+     * 平台管理-查询文章列表
      * @param dto
      * @return
      */
     @PostMapping("/list_vo")
-    public ResponseResult pageQuery(@RequestBody WmNewsPageReqDto dto){
-        return wmNewsService.pageQuery(dto);
+    public ResponseResult findList(@RequestBody NewsAuthDto dto){
+        return wmNewsService.findList(dto);
     }
 
     /**
-     * 根据id查看具体的文章
+     * 平台管理-查询文章详情
      * @param id
      * @return
      */
     @GetMapping("/one_vo/{id}")
-    public ResponseResult seeOne(@PathVariable("id") Integer id){
-        WmNews wmNews = wmNewsService.getById(id);
-        if(ObjectUtils.isEmpty(wmNews)){
-            return  ResponseResult.errorResult(AppHttpCodeEnum.DATA_NOT_EXIST,"文章不存在");
-        }else{
-            return ResponseResult.okResult(wmNews);
-        }
+    public ResponseResult findWmNewsVo(@PathVariable("id") Integer id){
+        return wmNewsService.findWmNewsVo(id);
     }
 
     /**
-     * 人工审核通过
-     * @param auditDto
+     * 文章审核成功
+     * @param dto
      * @return
      */
-    @Transactional
     @PostMapping("/auth_pass")
-    public ResponseResult  pass(@RequestBody WmAuditDto auditDto){
-        return wmNewsService.pass(auditDto);
+    public ResponseResult authPass(@RequestBody NewsAuthDto dto){
+        return wmNewsService.updateStatus(WemediaConstants.WM_NEWS_AUTH_PASS,dto);
     }
 
     /**
-     * 人工审核失败
-     * @param auditDto
+     * 文章审核失败
+     * @param dto
      * @return
      */
-    @Transactional
     @PostMapping("/auth_fail")
-    public ResponseResult  fail(@RequestBody WmAuditDto auditDto){
-        return wmNewsService.failPass(auditDto);
+    public ResponseResult authFail(@RequestBody NewsAuthDto dto){
+        return wmNewsService.updateStatus(WemediaConstants.WM_NEWS_AUTH_FAIL,dto);
     }
 
 }

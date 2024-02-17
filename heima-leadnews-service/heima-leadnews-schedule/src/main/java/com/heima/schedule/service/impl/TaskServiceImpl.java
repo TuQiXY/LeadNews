@@ -223,7 +223,9 @@ public class TaskServiceImpl implements TaskService {
     @Resource
     private RedissonClient redissonClient;
 
-
+    /**
+     * 未来数据定时刷新
+     */
     @Scheduled(cron = "0 */1 * * * ?")
     public void refresh() {
         System.out.println(System.currentTimeMillis() / 1000 + "执行了定时任务");
@@ -261,7 +263,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     /**
-     * 数据同步
+     * 数据库数据同步到redis
      */
     @Scheduled(cron = "0 */5 * * * ?")
     @PostConstruct

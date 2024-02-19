@@ -34,7 +34,7 @@ public class MinIOFileStorageService implements FileStorageService {
     private final static String separator = "/";
 
     /**
-     * @param dirPath
+     * @param dirPath 上传的文件的前缀
      * @param filename  yyyy/mm/dd/file.jpg
      * @return
      */
@@ -64,7 +64,8 @@ public class MinIOFileStorageService implements FileStorageService {
             PutObjectArgs putObjectArgs = PutObjectArgs.builder()
                     .object(filePath)
                     .contentType("image/jpg")
-                    .bucket(minIOConfigProperties.getBucket()).stream(inputStream,inputStream.available(),-1)
+                    .bucket(minIOConfigProperties.getBucket())
+                    .stream(inputStream,inputStream.available(),-1)
                     .build();
             minioClient.putObject(putObjectArgs);
             StringBuilder urlPath = new StringBuilder(minIOConfigProperties.getReadPath());

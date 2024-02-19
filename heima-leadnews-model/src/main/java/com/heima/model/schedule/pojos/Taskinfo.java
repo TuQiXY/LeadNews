@@ -14,7 +14,7 @@ import java.util.Date;
  *   延迟任务信息表
  * </p>
  *
- * @author itheima
+ * @author zxr
  */
 @Data
 @TableName("taskinfo")

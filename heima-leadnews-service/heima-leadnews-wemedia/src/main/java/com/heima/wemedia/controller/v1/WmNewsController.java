@@ -9,6 +9,8 @@ import com.heima.model.wemedia.dtos.WmNewsDto;
 import com.heima.model.wemedia.dtos.WmNewsPageReqDto;
 import com.heima.model.wemedia.pojos.WmNews;
 import com.heima.wemedia.service.WmNewsService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -16,17 +18,20 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/news")
+@Api(tags = "文章操作")
 public class WmNewsController {
 
 
     @Autowired
     private WmNewsService wmNewsService;
 
+    @ApiOperation("自媒体查询文章列表")
     @PostMapping("/list")
     public ResponseResult findAll(@RequestBody WmNewsPageReqDto dto){
         return  wmNewsService.findAll(dto);
     }
 
+    @ApiOperation("自媒体文章发布")
     @PostMapping("/submit")
     public ResponseResult submitNews(@RequestBody WmNewsDto dto){
         return  wmNewsService.submitNews(dto);

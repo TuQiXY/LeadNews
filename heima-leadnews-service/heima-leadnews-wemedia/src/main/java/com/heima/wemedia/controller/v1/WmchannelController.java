@@ -4,28 +4,28 @@ import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.wemedia.dtos.ChannelDto;
 import com.heima.model.wemedia.pojos.WmChannel;
 import com.heima.wemedia.service.WmChannelService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/channel")
+@Api(tags = "自媒体端文章频道管理")
 public class WmchannelController {
 
 
     @Autowired
     private WmChannelService wmChannelService;
 
+
+    @ApiOperation("查询所有频道")
     @GetMapping("/channels")
     public ResponseResult findAll(){
         return wmChannelService.findAll();
     }
 
-    /**
-     * 频道名称模糊分页查询
-     * @param dto
-     * @return
-     */
+    @ApiOperation("条件分页查询")
     @PostMapping("/list")
     public ResponseResult findByNameAndPage(@RequestBody ChannelDto dto){
         return wmChannelService.findByNameAndPage(dto);

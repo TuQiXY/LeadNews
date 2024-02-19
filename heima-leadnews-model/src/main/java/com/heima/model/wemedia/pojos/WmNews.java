@@ -15,7 +15,7 @@ import java.util.Date;
  * 自媒体图文内容信息表
  * </p>
  *
- * @author itheima
+ * @author zxr
  */
 @Data
 @TableName("wm_news")
@@ -62,6 +62,9 @@ public class WmNews implements Serializable {
     @TableField("channel_id")
     private Integer channelId;
 
+    /**
+     * 文章标签
+     */
     @TableField("labels")
     private String labels;
 

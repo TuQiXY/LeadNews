@@ -41,7 +41,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="es-init" options="-parameters" />
       <module name="heima-file-starter" options="-parameters" />
-      <module name="heima-leadnews" options="-parameters" />
+      <module name="heima-leadnews" options="" />
       <module name="heima-leadnews-admin" options="-parameters" />
       <module name="heima-leadnews-admin-gateway" options="-parameters" />
       <module name="heima-leadnews-app-gateway" options="-parameters" />

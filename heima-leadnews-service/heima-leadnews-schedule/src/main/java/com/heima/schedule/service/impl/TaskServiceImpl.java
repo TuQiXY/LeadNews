@@ -229,7 +229,6 @@ public class TaskServiceImpl implements TaskService {
     @Scheduled(cron = "0 */1 * * * ?")
     public void refresh() {
         System.out.println(System.currentTimeMillis() / 1000 + "执行了定时任务");
-
         //加锁
         //先生成一个key
         String key  = "FUTURE_LOCK";

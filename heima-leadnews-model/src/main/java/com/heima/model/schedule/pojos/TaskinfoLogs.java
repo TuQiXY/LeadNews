@@ -11,7 +11,7 @@ import java.util.Date;
  *   延迟任务日志类
  * </p>
  *
- * @author itheima
+ * @author zxr
  */
 @Data
 @TableName("taskinfo_logs")

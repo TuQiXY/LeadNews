@@ -12,6 +12,12 @@ import java.util.List;
 @Mapper
 public interface ApArticleMapper extends BaseMapper<ApArticle> {
 
+    /**
+     * 查看文章列表
+     * @param dto
+     * @param type 加载方式
+     * @return
+     */
     public List<ApArticle> loadArticleList(@Param("dto") ArticleHomeDto dto, @Param("type") Short type);
 
     public List<ApArticle> findArticleListByLast5days(@Param("dayParam") Date dayParam);

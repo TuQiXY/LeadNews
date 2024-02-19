@@ -14,7 +14,7 @@ import java.io.Serializable;
  * APP已发布文章配置表
  * </p>
  *
- * @author itheima
+ * @author zxr
  */
 
 @Data
